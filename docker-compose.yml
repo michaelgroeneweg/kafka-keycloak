@@ -57,6 +57,30 @@ services:
       - 8080:8080
 
   kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - 8085:8080
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      AUTH_TYPE: OAUTH2
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_CLIENTID: ${KAFKA_UI_CLIENT_ID}
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_CLIENTSECRET: ${KAFKA_UI_CLIENT_SECRET}
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_SCOPE: ${KAFKA_UI_CLIENT_SCOPE}
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_ISSUER_URI: ${OAUTH_PROTOCOL}://${OAUTH_SERVER}/realms/avataa
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_CLIENT_NAME: KEYCLOAK
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_PROVIDER: KEYCLOAK
+      AUTH_OAUTH2_CLIENT_KEYCLOAK_CUSTOM_PARAMS_TYPE: KEYCLOAK
+    # kafka SASL OAUTHBEARER
+      KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: SASL_PLAINTEXT
+      KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM: OAUTHBEARER
+      KAFKA_CLUSTERS_0_PROPERTIES_SASL_LOGIN_CALLBACK_HANDLER_CLASS: org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler
+      KAFKA_CLUSTERS_0_PROPERTIES_SASL_OAUTHBEARER_TOKEN_ENDPOINT_URL: ${OAUTH_PROTOCOL}://${OAUTH_SERVER}/realms/avataa/protocol/openid-connect/token
+      KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required clientId="${KAFKA_CLIENT_ID}" clientSecret="${KAFKA_CLIENT_SECRET}" scope=${OAUTH_LOGIN_SCOPE};
+  
+      
+  kafka-ui:
     container_name: kafka-ui
     image: provectuslabs/kafka-ui:latest
     environment:
