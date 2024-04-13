@@ -78,15 +78,4 @@ services:
       KAFKA_CLUSTERS_0_PROPERTIES_SASL_LOGIN_CALLBACK_HANDLER_CLASS: org.apache.kafka.common.security.oauthbearer.secured.OAuthBearerLoginCallbackHandler
       KAFKA_CLUSTERS_0_PROPERTIES_SASL_OAUTHBEARER_TOKEN_ENDPOINT_URL: ${OAUTH_PROTOCOL}://${OAUTH_SERVER}/realms/avataa/protocol/openid-connect/token
       KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG: org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginModule required clientId="${KAFKA_CLIENT_ID}" clientSecret="${KAFKA_CLIENT_SECRET}" scope=${OAUTH_LOGIN_SCOPE};
-  
-      
-  kafka-ui:
-    container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
-    environment:
-      KAFKA_CLUSTERS_0_NAME: local
-      # other properties, omitted
-      SPRING_CONFIG_ADDITIONAL-LOCATION: /kafkaui-config.yml
-    volumes:
-      - /tmp/config.yml:/kafkaui-config.yml
      
