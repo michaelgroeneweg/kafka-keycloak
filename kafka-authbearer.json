@@ -8,23 +8,6 @@
     "accessTokenLifespanForImplicitFlow": 7200,
     "ssoSessionIdleTimeout": 18000,
     "ssoSessionMaxLifespan": 36000,
-    "users" : [
-      {
-        "username" : "kafkauser",
-        "enabled": true,
-        "email" : "duminda@kafkaob.net",
-        "firstName": "Duminda",
-        "lastName": "Wanninayake",
-        "credentials" : [
-          { "type" : "password",
-            "value" : "kaf111" }
-        ],
-        "realmRoles": [ "USER", "ADMIN"],
-        "clientRoles": {
-          "account": ["view-profile", "manage-account"]
-        }
-      }
-    ],
     "roles" : {
       "realm" : [
         {
