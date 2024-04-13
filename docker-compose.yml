@@ -43,7 +43,7 @@ services:
       #      SASL_SERVER_CALLBACK_HANDLER: com.mcmedisoft.security.oauthbearer.OauthAuthenticateValidatorCallbackHandler
 
   keycloak-dev:
-    image: quay.io/keycloak/keycloak:19.0.3
+    image: quay.io/keycloak/keycloak:latest
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin123
