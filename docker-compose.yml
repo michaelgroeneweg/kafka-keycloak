@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   zookeeper:
-    image: quay.io/strimzi/kafka:0.30.0-kafka-3.2.0
+    image: quay.io/strimzi/latest-kafka-3.7.0 
     command: [
       "sh", "-c",
       "bin/zookeeper-server-start.sh config/zookeeper.properties"
@@ -14,7 +14,7 @@ services:
       LOG_DIR: /tmp/logs
 
   kafka:
-    image: quay.io/strimzi/kafka:0.30.0-kafka-3.2.0
+    image: quay.io/strimzi/latest-kafka-3.7.0 
     command: [
       "/tmp/wait-for-keycloak.sh"
     ]
